@@ -1,4 +1,4 @@
-// import { mainError } from './routes/errorMessages/general';
+import { mainError } from './routes/errorMessages/general';
 // const mainError = require('./routes/errorMessages/general');
 
 
@@ -16,8 +16,8 @@ app.use('/hello', hello);
 app.use('/variables', dynamicVariables)
  
 app.all('*', function (req, res) {
-    res.send("Coś nie pykło...");
-    // res.send(mainError);     //jeśli robię importa, testy nie działają :/
+    // res.send("Coś nie pykło...");
+    res.send(mainError);     //jeśli robię importa, testy nie działają :/
 });
 
 module.exports = app;

@@ -1,3 +1,5 @@
+import { mainError } from '../../routes/errorMessages/general';
+
 // import { "Coś nie pykło..." } from '../../routes/errorMessages/general';
 // const mainError = require( '../../routes/errorMessages/general');
 
@@ -11,8 +13,7 @@ const app = require('../..//app');
 test('Błędna ścieżka z jednym niby-argumentem wywala błąd', async () => {
     expect.assertions(1);
     const response = await request(app).get('/ds');
-
-    expect(response.text).toBe("Coś nie pykło...");
+    expect(response.text).toBe(mainError);
 });
 
 test('ścieżka z dwoma argumentami w URL odczytuje argumenty poprawnie', async () => {

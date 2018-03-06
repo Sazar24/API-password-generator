@@ -19,6 +19,7 @@ test('Obsługa get dla: /hello (zdefiniowany jest tylko .post, .get i .all)', as
     const path = "/hello/NOT_EXISTING_TARGET";
 
     const response = await request(app).get(path);
+    // expect(response.text).toBe(mainError);
     expect(response.text).toBe("Coś nie pykło...");
 });
 
