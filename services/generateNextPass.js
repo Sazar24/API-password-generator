@@ -13,7 +13,7 @@ function generateNextPassword(counter, array1, array2) {
    
     if (index1 > size1 - 1) index1 = size1 - 1; // blokada - osiągnieto limit haseł
 
-    return (array1[index2] + array2[index1]);
+    return (array1[index1] + array2[index2]);
 }
 
 function createNewPassword(token, database) {
