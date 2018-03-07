@@ -1,7 +1,5 @@
-import { mainError } from '../../routes/errorMessages/general';
-
 // import { "Coś nie pykło..." } from '../../routes/errorMessages/general';
-// const mainError = require( '../../routes/errorMessages/general');
+const mainError = require( '../../routes/errorMessages/general');
 
 const request = require('supertest');
 const app = require('../..//app');
