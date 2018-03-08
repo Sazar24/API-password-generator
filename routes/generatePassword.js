@@ -1,6 +1,6 @@
 const express = require('express');
 const saveToFileAsSting = require('../services/fileHandling/save');
-const createNewPassword = require('./../services/generateNextPass.js');
+const createAndSavePassword = require('./../services/generateNextPass.js');
 const readFileAsPromise = require('../services/fileHandling/read');
 const path = require('../consts/pathToFile');
 
@@ -13,7 +13,7 @@ router.get('/:token', async function (req, res) {
         database = await readFileAsPromise(path);
     } catch (err) { console.log("error on reading data from file ", err) }
 
-    const newPassword = createNewPassword(req.params.token, database);
+    const newPassword = createAndSavePassword(req.params.token, database);
 
     saveToFileAsSting(path, database);
 

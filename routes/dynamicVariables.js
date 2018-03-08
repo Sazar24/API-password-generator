@@ -2,6 +2,14 @@ let express = require('express');
 let router = express.Router();
 
 
+router.use('/', function (req, res, next) {
+    const dateNow = new Date();
+    const nowAsString = `${dateNow.getHours()}:${dateNow.getMinutes()}:${dateNow.getSeconds()}.${dateNow.getMilliseconds()}`;
+    console.log("A new request received at " + nowAsString);
+
+    next();
+});
+
 
 router.post('/:number([0-9]{3})', function (req, res) {
     res.send(`Your number is: ${req.params.number}` );

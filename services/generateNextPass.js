@@ -7,7 +7,7 @@ const words2 = require("../consts/passwordComponents2.js");
 const isTokenAlreadyExist = require('./existenceCheack');
 
 
-function createNewPassword(token, database) {
+function createAndSavePassword(token, database) {
 
     const wasAlreadyDefined = isTokenAlreadyExist(token, database);
 
@@ -15,13 +15,13 @@ function createNewPassword(token, database) {
     if (wasAlreadyDefined) {
         counter = database[token].counter;
     } else counter = 0;
-
     counter++;
 
     const password = combineKeyWords(counter, words1, words2);
+
     saveNewPasswordLocally(database, token, password, counter);
 
     return password;
 }
 
-module.exports = createNewPassword;
+module.exports = createAndSavePassword;
