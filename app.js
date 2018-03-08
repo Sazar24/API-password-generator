@@ -1,6 +1,6 @@
 // import { mainError } from './routes/errorMessages/general';
 const mainError = require('./routes/errorMessages/general');
-var fs = require("fs")
+const fs = require('fs');
 
 let express = require('express');
 let app = express();
@@ -17,6 +17,21 @@ app.use('/variables', function (req, res, next) {
 
     next();
 });
+
+
+// let lyrics = 'Ene due rabe, bocian dmucha żabę\n x)';
+
+// fs.writeFile('plikStworzony.txt', lyrics, (err) => {  
+//     if (err) throw err;
+
+//     console.log('Lyric saved!');
+// });
+// fs.readFile('plikStworzony.txt', function (err, data) {
+//     if (err) {
+//        return console.error(err);
+//     }
+//     console.log("Asynchronous read: " + data.toString());
+//  });
 
 app.use('/things', things);
 app.use('/hello', hello);
