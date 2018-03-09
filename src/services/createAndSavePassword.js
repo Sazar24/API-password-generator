@@ -1,15 +1,13 @@
-const combineKeyWords = require("./combineKeyWords");
-
 const saveNewPasswordLocally = require("./savePasswordLocally");
+const combineKeyWords = require("./combineKeyWords");
+const isTokenAlreadyExist = require('./existenceCheack');
 
 const words1 = require("../consts/passwordComponents1.js");
 const words2 = require("../consts/passwordComponents2.js");
-const isTokenAlreadyExist = require('./existenceCheack');
-
 
 function createAndSavePassword(token, database) {
 
-    const wasAlreadyDefined = isTokenAlreadyExist(token, database);
+   const wasAlreadyDefined = isTokenAlreadyExist(token, database);
 
     let counter;
     if (wasAlreadyDefined) {
