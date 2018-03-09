@@ -1,8 +1,11 @@
+
 const express = require('express');
 const saveToFileAsSting = require('../services/fileHandling/save');
 const createAndSavePassword = require('./../services/generateNextPass.js');
 const readFileAsPromise = require('../services/fileHandling/read');
 const path = require('../consts/pathToFile');
+// const path = require('./../pathToFile2');
+// import { path } from '../consts/pathToFile';
 
 const router = express.Router();
 

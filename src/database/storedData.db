@@ -1,0 +1,25 @@
+{
+"123":
+	{"password":"G0",
+	"counter":60},
+
+"example":
+	{"password":"J5",
+	"counter":105},
+
+"ss":
+	{"password":"A8",
+	"counter":8},
+
+"mmAaS":
+	{"password":"A5",
+	"counter":5},
+
+"mmAas":
+	{"password":"E1",
+	"counter":41},
+
+"m":
+	{"password":"C0",
+	"counter":20}
+}
