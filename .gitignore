@@ -1,7 +1,6 @@
 # dependencies
 /node_modules
 /database/storedData.db
-/plikStworzony.txt
 
 
 # misc
