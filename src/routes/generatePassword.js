@@ -1,3 +1,5 @@
+const getTimeNow = require( '../services/clock/getTimeNow');
+
 
 const express = require('express');
 const saveToFileAsSting = require('../services/fileHandling/save');
@@ -20,7 +22,7 @@ router.get('/:token', async function (req, res) {
     const newPassword = createAndSavePassword(req.params.token, database);
 
     saveToFileAsSting(path, database).then(
-        res.send(`Your token is: ${req.params.token} and your new password is: ${newPassword}`)
+        res.send(`Your token is: ${req.params.token} and your new password is: ${newPassword}  ${getTimeNow()}`)
     );
 });
 

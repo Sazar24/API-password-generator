@@ -1,15 +1,8 @@
+const getTimeNow = require('../clock/getTimeNow');
+
 const fs = require('fs');
+const makeItReadable = require('./makeItReadable');
 
-function makeItReadable(data) {  //adjustment for human-readers; //originally designed for storedData.db
-    let newString = data;
-    newString = newString.replace('{"', '{\n"');    // first line only
-    newString = newString.replace(/},/g, "},\n\n");
-    newString = newString.replace(/","/g, '",\n\t"');
-    newString = newString.replace(/:{/g, ":\n\t{");
-    newString = newString.replace('}}', '}\n}');    // last line only
-
-    return newString;
-};
 
 async function saveToFileAsSting(path, dataToSave) {
     let data = JSON.stringify(dataToSave);
@@ -21,7 +14,7 @@ async function saveToFileAsSting(path, dataToSave) {
                 console.log('crash on saving data to file!', err);
                 reject(err);
             } else {
-                console.log('saved successfuly');
+                console.log('saved successfuly', getTimeNow());
                 resolve();
             }
         })

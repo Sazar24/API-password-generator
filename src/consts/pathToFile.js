@@ -1,3 +1,3 @@
-const path = './src/database/storedData.db';
+const path = 'src/database/storedData.db';
 
 module.exports = path;
