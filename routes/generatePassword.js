@@ -15,9 +15,10 @@ router.get('/:token', async function (req, res) {
     catch (err) { console.log("error on reading data from file ", err) }
 
     const newPassword = createAndSavePassword(req.params.token, database);
-    saveToFileAsSting(path, database);
 
-    res.send(`Your token is: ${req.params.token} and your new password is: ${newPassword}`);
+    saveToFileAsSting(path, database).then(
+        res.send(`Your token is: ${req.params.token} and your new password is: ${newPassword}`)
+    );
 });
 
 module.exports = router;
