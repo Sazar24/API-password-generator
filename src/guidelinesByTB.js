@@ -1,36 +1,49 @@
 const express = require('express');
-const router = express.Router();
-const TokensStorageClass = require('../services/TokensStorage/TokensStorage');
-const PasswordProviderclass = require('../services/PasswordProvider/PasswordProvider');
 
+const saveToFileAsSting = require('../services/fileHandling/save');
+const createAndSavePassword = require('./../services/createAndSavePassword.js');
+const readFileAsync = require('../services/fileHandling/read');
+const getTimeNow = require('../services/clock/getTimeNow');
+const pathToTokensDatabase = require('../consts/paths/tokensDatabase');
+
+const router = express.Router();
 
 router.get('/:token', async function (req, res) {
-    // const TokenStorage = new TokensStorageClass();
-    const PasswordProvider = new PasswordProviderclass();
+    // let database;
+    // try 
+    // {
+    //     database = await readFileAsync(path);
+    // }
+    // catch (err) 
+    // { 
+    //     // console.log("error on reading data from file ", err) 
+    //     res.sendStatus(500);
+    //     return;
+    // }
+    
+    // const newPassword = createAndSavePassword(req.params.token, database);
 
-    try {
-        // const text = await TokenStorage.getData();
-        // const token = req.params.token;
-        // const counterOfToken = await TokenStorage.getTokensCounterValue(token);
-        
-        // const textRespond = `Your token is: ${req.params.token} and your new password is: ${newPassword}  ${getTimeNow()}`;
-        
+    // await saveToFileAsSting(path, database);
+
+    // res.send(`Your token is: ${req.params.token} and your new password is: ${newPassword}  ${getTimeNow()}`);
+    try
+    {
         const token = req.params.token;
-        const password = await PasswordProvider.generateNextPassword(token);
+        const password = PasswordProvider.GetNext(token);
 
-
-        res.status(200).send(`${token} ... ${password}`);
+        res.status(200).send(password);
     }
-    catch (ex) {
-        res.sendStatus(500);
-        throw ex;
+    catch (ex)
+    {
+        res.status(500);
     }
+    
 });
 
 module.exports = router;
 
 
-/*
+
 class PasswordProvider
 {
     constructor(_tokensStorage: TokensStorage)
@@ -81,6 +94,8 @@ class TokensStorage
 
     }
 
+
+
     FindByToken(token): Entry|null
     {
         text = _textFileStorage.Read();
@@ -89,8 +104,12 @@ class TokensStorage
     }
 }
 
+
+
 class Entry
 {
     token: string;
     counter: number;
-}*/
+}
+
+

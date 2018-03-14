@@ -1,10 +1,8 @@
 const fs = require('fs');
-const makeItReadable = require('./makeItReadable');
 const getTimeNow = require('../clock/getTimeNow');
 
 async function saveToFileAsSting(path, dataToSave) {
     let data = JSON.stringify(dataToSave);
-    data = makeItReadable(data);
 
     return new Promise((resolve, reject) => {
         fs.writeFile(path, data, (err) => {
@@ -20,3 +18,5 @@ async function saveToFileAsSting(path, dataToSave) {
 }
 
 module.exports = saveToFileAsSting;
+
+
