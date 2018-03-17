@@ -25,6 +25,21 @@ class TokensStorage {
         return this._data[token];
     }
 
+    async save(token, counter, password) {
+        await this.initIfNeccessary();  //to teoretycznie nie jest tu potrzebne (bo to wynika z algorytmu, aaaale... może kiedyś na wyższym poziomie coś zmienię, to niech to tu już zostanie.)
+        if (this._data[token] === undefined)
+            this._createNewTokenData(token, password);
+
+        this._data[token] = { "counter": counter + 1, "password": password }
+
+        try {
+            await this.saveStorageToFile(this._data);
+        }
+        catch (err) {
+            throw ("coudnt save the TokensStorage to file", err);
+        }
+    }
+
     _createNewTokenData(token, password = "not-set,yet") {
         this._data[token] = { "counter": 1, "password": password };
     }
@@ -38,7 +53,6 @@ class TokensStorage {
         return this._data[token].counter;
     }
 
-    //function: save to file
     async saveStorageToFile() {
         try {
             await new FilesHandler().saveFile(this._data);
@@ -48,21 +62,6 @@ class TokensStorage {
         }
     }
 
-    //function: update (new) tokens counterValue - locally
-    async updateTokenData(token, counter, password) {
-        await this.initIfNeccessary();  //to teoretycznie nie jest tu potrzebne (bo to wynika z algorytmu, aaaale... może kiedyś na wyższym poziomie coś zmienię, to niech to tu już zosanie.)
-        if (this._data[token] === undefined)
-            this._createNewTokenData(token, password);
-
-        this._data[token] = { "counter": counter + 1, "password": password }
-
-        try {
-            await this.saveStorageToFile(this._data);
-        }
-        catch (err) {
-            throw err;
-        }
-    }
 
 
 }

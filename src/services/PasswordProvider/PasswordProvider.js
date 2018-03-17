@@ -1,12 +1,9 @@
 const TokensStorage = require('../TokensStorage/TokensStorage');
 const words1 = require('../../consts/passwordComponents1');
 const words2 = require('../../consts/passwordComponents2');
-// const combineKeyWords = require('../combineKeyWords');
-const combineKeyWords = require('../combineKeyWords');
 
 
 class PasswordProvider {
-    // constructor(dataStorage)
     constructor() {
         this._tokenStorage = new TokensStorage();
         this._components1 = words1;
@@ -14,34 +11,32 @@ class PasswordProvider {
     }
 
     async generateNextPassword(token) {
-        let counter = await this._tokenStorage.getCounterValue(token)
-        
-        const password = combineKeyWords(counter, this._components1, this._components2);
         try {
-            this._tokenStorage = await this._tokenStorage.updateTokenData(token, counter, password);
+            let counter = await this._tokenStorage.getCounterValue(token)
+
+            const password = this.combineComponents(counter, this._components1, this._components2);
+            this._tokenStorage = await this._tokenStorage.save(token, counter, password);
             return password;
         }
         catch (err) {
-            throw ("+++Error on updatTokensData during generateNextPassword+++ ", err);
+            throw (err);
         }
     }
 
+    combineComponents(counter, array1, array2) {
+        const size1 = array1.length;
+        const size2 = array2.length;
+        counter = this.counterAdjust(counter, size1 * size2);
 
+        const index1 = Math.floor(counter / size2);
+        const index2 = counter % size2;
 
+        return (array1[index1] + array2[index2]);
+    }
 
-    // const 
-    // async generateNextPasswordForToken(token) {
-    //     // return kupa";
-
-    // }
-
-    //odczytaj plik -> zapisz wynik w tokensStorage
-    //znajdź token i jego counterValue
-    //odczytaj passwordComponents
-    //połącz passwordComponents 
-    //+zwróć wynik połączenia
-    //zapisz wynik do dokensStorage (który pod spodem zapisuje to do pliku)
-
+    counterAdjust(counter, max) {
+        return counter % max;
+    }
 
 }
 

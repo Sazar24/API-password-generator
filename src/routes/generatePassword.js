@@ -1,23 +1,14 @@
 const express = require('express');
 const router = express.Router();
-const TokensStorageClass = require('../services/TokensStorage/TokensStorage');
-const PasswordProviderclass = require('../services/PasswordProvider/PasswordProvider');
+const PasswordProviderClass = require('../services/PasswordProvider/PasswordProvider');
 
 
 router.get('/:token', async function (req, res) {
-    // const TokenStorage = new TokensStorageClass();
-    const PasswordProvider = new PasswordProviderclass();
+    const PasswordProvider = new PasswordProviderClass();
 
     try {
-        // const text = await TokenStorage.getData();
-        // const token = req.params.token;
-        // const counterOfToken = await TokenStorage.getTokensCounterValue(token);
-        
-        // const textRespond = `Your token is: ${req.params.token} and your new password is: ${newPassword}  ${getTimeNow()}`;
-        
         const token = req.params.token;
         const password = await PasswordProvider.generateNextPassword(token);
-
 
         res.status(200).send(`${token} ... ${password}`);
     }

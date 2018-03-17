@@ -24,13 +24,11 @@ class FilesHandler {
         }
     }
 
-    //f:save data
     async saveFile(data) {
         try {
+            await fs.pathExists(pathToTokensDatabase); 
             await fs.writeJson(pathToTokensDatabase, data)
-            console.log('success on writing data')
         } catch (err) {
-            console.error("kupa!", err)
             throw err;
         }
     }
